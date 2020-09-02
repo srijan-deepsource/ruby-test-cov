@@ -11,6 +11,4 @@ script:
   - make run-rspec
 
 after_success:
-  - DEEPSOURCE_DSN=$PROD_DSN
-  - echo $DEEPSOURCEDSN
   - make report-artifacts
