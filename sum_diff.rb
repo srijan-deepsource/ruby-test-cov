@@ -11,3 +11,11 @@ end
 def sum_diff(first, second)
   [first + second, first - second]
 end
+
+def diff_sum_diff(first, second)
+  [first + second, first - second]
+end
+
+def diff_sum_diff_sum(first, second)
+  [first + second, first - second]
+end
