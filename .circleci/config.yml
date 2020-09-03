@@ -42,3 +42,9 @@ jobs:
       - run:
           name: Capture cwd
           command: go run .
+
+workflows:
+  main:
+    jobs:
+      - build
+      - go_run
