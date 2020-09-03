@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@0.1.2
 
 jobs:
   build:
@@ -15,19 +15,30 @@ jobs:
       - run:
           name: bundle-install
           command: bundle install
-      
+
       - run:
           name: run tests
           command: make run-rspec
-      
+
+      - run:
+        name: store cwd
+        command: wd=$(pwd)
+
       - run:
           name: install DS CLI
-          command: curl https://deepsource.io/cli | sh
-      
+          command: make install-cli
+          - run:
+          name: install DS CLI
+          command: make install-cli
+
+      - run:
+          name: return to the working directory
+          command: cd $wd
+
       - run:
           name: Report artifacts to CLI
-          command: ./bin/deepsource report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
-      
+          command: /tmp/cli/cli report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
+
       - run:
           name: Print work dir
           command: pwd
