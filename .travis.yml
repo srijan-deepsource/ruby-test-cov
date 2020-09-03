@@ -9,6 +9,5 @@ script:
   - make run-rspec
 
 after_success:
-  - make report-artifacts
-  #- ./bin/deepsource report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
-  #- ./ds_cli report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
+  - curl https://deepsource.io/cli | sh
+  - ./bin/deepsource report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
