@@ -11,3 +11,7 @@ end
 def mul_div(first, second)
   [first * second, first / second]
 end
+
+def asdf_mul_div(first, second)
+  [first * second, first / second]
+end
