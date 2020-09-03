@@ -1,0 +1,14 @@
+sudo: required
+dist: bionic
+language: ruby
+rvm:
+  - 2.6
+
+script:
+  - bundle install
+  - make run-rspec
+
+after_success:
+  #- make install-cli
+  #- ./bin/deepsource report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
+  - ./ds_cli report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
