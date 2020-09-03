@@ -1,0 +1,31 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
+      
+      - run:
+          name: run tests
+          command: make run-rspec
+      
+      - run:
+          name: install DS CLI
+          command: curl https://deepsource.io/cli | sh
+      
+      - run:
+          name: Report artifacts to CLI
+          command: ./bin/deepsource report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
+      
+      - run:
+          name: Print work dir
+          command: pwd
