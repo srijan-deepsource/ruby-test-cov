@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@0.1.2
+  go: circleci/go@1.3.1
 
 jobs:
   build:
@@ -15,19 +16,35 @@ jobs:
       - run:
           name: bundle-install
           command: bundle install
-      
+
       - run:
           name: run tests
           command: make run-rspec
-      
+
       - run:
           name: install DS CLI
           command: curl https://deepsource.io/cli | sh
-      
+
       - run:
           name: Report artifacts to CLI
           command: ./bin/deepsource report --analyzer test-coverage --key ruby --value-file ./coverage/.resultset.json
-      
+
       - run:
           name: Print work dir
           command: pwd
+
+  go_run:
+    executor:
+      name: go/default
+      tag: '1.15'
+    steps:
+      - checkout
+      - run:
+          name: Capture cwd
+          command: go run .
+
+workflows:
+  main:
+    jobs:
+      - build
+      - go_run
