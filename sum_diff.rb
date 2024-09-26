@@ -11,3 +11,7 @@ end
 def sum_diff(first, second)
   [first + second, first - second]
 end
+
+def new_sum_diff(first, second)
+  [first + second, first - second]
+end
