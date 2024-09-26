@@ -11,3 +11,4 @@ end
 def mul_div(first, second)
   [first * second, first / second]
 end
+
